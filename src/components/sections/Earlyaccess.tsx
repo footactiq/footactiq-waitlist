@@ -84,7 +84,7 @@ export default function EarlyAccess() {
         alignItems: "center",
         justifyContent: "center",
         padding: "40px 16px",
-        fontFamily: "'Trebuchet MS', sans-serif",
+        fontFamily: "inherit",
       }}
     >
       <style>{`
@@ -318,7 +318,7 @@ export default function EarlyAccess() {
 
       {/* ── MAIN FORM ── */}
       <div style={{ width: "100%", maxWidth: 720, display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div className="w-full mx-auto"  style={{ textAlign: "center", marginBottom: 28, width: "100%" }}>
+        <div style={{ textAlign: "center", marginBottom: 28, width: "100%" }}>
           <h1
             className="text-[22px] sm:text-[28px] lg:text-[32px]"
             style={{
@@ -338,11 +338,11 @@ export default function EarlyAccess() {
           </p>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 10, width: "100%",  }}>
-          <input className="field-input" type="text" value={form.name} onChange={set("name")} placeholder="Full Name" style={inputStyle} />
-          <input className="field-input" type="email" value={form.email} onChange={set("email")} placeholder="Email Address" style={inputStyle} />
-          <input className="field-input" type="text" value={form.club} onChange={set("club")} placeholder="Club / Organisation" style={inputStyle} />
-          <input className="field-input" type="text" value={form.level} onChange={set("level")} placeholder="Coaching Level" style={inputStyle} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, width: "100%" }}>
+          <input className="field-input mb-4" type="text" value={form.name} onChange={set("name")} placeholder="Full Name" style={inputStyle} />
+          <input className="field-input mb-4" type="email" value={form.email} onChange={set("email")} placeholder="Email Address" style={inputStyle} />
+          <input className="field-input mb-4" type="text" value={form.club} onChange={set("club")} placeholder="Club / Organisation" style={inputStyle} />
+          <input className="field-input mb-4" type="text" value={form.level} onChange={set("level")} placeholder="Coaching Level" style={inputStyle} />
 
           {error && (
             <p style={{ margin: 0, fontSize: 13, color: "#ef4444", textAlign: "center" }}>{error}</p>
