@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SignupProvider } from "@/context/SignupContext"; // adjust path as needed
+import SignupModal from "@/components/SignupModal";       // adjust path as needed
 
 export const metadata: Metadata = {
   title: "Footactiq — Analyze Matches Like A Pro",
@@ -20,7 +22,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <SignupProvider>
+          {children}
+          {/* SignupModal is mounted once here so any button on any page can trigger it */}
+          <SignupModal />
+        </SignupProvider>
+      </body>
     </html>
   );
 }

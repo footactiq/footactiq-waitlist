@@ -1,379 +1,197 @@
 "use client";
 
-export default function NetworkSVG() {
+export default function NetworkBackground() {
   return (
-    <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}>
+    <div className="w-full h-full pointer-events-none">
       <style>{`
-        @keyframes networkFloat {
+        @keyframes netFloat {
           0%, 100% { transform: translateY(0px) translateX(0px); }
-          33%       { transform: translateY(-12px) translateX(4px); }
-          66%       { transform: translateY(6px) translateX(-4px); }
+          33%       { transform: translateY(-10px) translateX(5px); }
+          66%       { transform: translateY(7px) translateX(-4px); }
         }
-        @keyframes lineGlow1 {
-          0%, 100% { opacity: 0.12; }
-          50%       { opacity: 0.55; }
+        @keyframes glow1 {
+          0%, 100% { opacity: 0.10; }
+          50%       { opacity: 0.50; }
         }
-        @keyframes lineGlow2 {
-          0%, 100% { opacity: 0.08; }
-          50%       { opacity: 0.45; }
+        @keyframes glow2 {
+          0%, 100% { opacity: 0.07; }
+          50%       { opacity: 0.40; }
         }
-        @keyframes lineGlow3 {
+        @keyframes glow3 {
           0%, 100% { opacity: 0.05; }
-          50%       { opacity: 0.35; }
+          50%       { opacity: 0.30; }
         }
-        @keyframes dotPulse1 {
-          0%, 100% { opacity: 0.6; r: 2.5; }
-          50%       { opacity: 1; r: 4.5; }
+        @keyframes pulse1 {
+          0%, 100% { opacity: 0.55; transform: scale(1); }
+          50%       { opacity: 1;    transform: scale(1.6); }
         }
-        @keyframes dotPulse2 {
-          0%, 100% { opacity: 0.4; r: 2; }
-          50%       { opacity: 0.95; r: 3.5; }
+        @keyframes pulse2 {
+          0%, 100% { opacity: 0.40; transform: scale(1); }
+          50%       { opacity: 0.90; transform: scale(1.4); }
         }
-        @keyframes dotPulse3 {
-          0%, 100% { opacity: 0.7; r: 3; }
-          50%       { opacity: 1; r: 5; }
+        @keyframes pulse3 {
+          0%, 100% { opacity: 0.65; transform: scale(1); }
+          50%       { opacity: 1;    transform: scale(1.8); }
         }
-        @keyframes dashFlow {
-          0%   { stroke-dashoffset: 300; opacity: 0; }
-          10%  { opacity: 0.6; }
-          90%  { opacity: 0.6; }
-          100% { stroke-dashoffset: 0; opacity: 0; }
+        @keyframes flow {
+          0%   { stroke-dashoffset: 400; opacity: 0; }
+          8%   { opacity: 0.7; }
+          88%  { opacity: 0.7; }
+          100% { stroke-dashoffset: 0;   opacity: 0; }
         }
-        .net-group {
-          animation: networkFloat 14s ease-in-out infinite;
+        @keyframes flow2 {
+          0%   { stroke-dashoffset: 320; opacity: 0; }
+          10%  { opacity: 0.5; }
+          90%  { opacity: 0.5; }
+          100% { stroke-dashoffset: 0;   opacity: 0; }
         }
-        .net-line-a { animation: lineGlow1 3.5s ease-in-out infinite; }
-        .net-line-b { animation: lineGlow2 4.2s ease-in-out infinite 0.8s; }
-        .net-line-c { animation: lineGlow3 5.1s ease-in-out infinite 1.6s; }
-        .net-line-d { animation: lineGlow1 3.8s ease-in-out infinite 2.2s; }
-        .net-line-e { animation: lineGlow2 4.6s ease-in-out infinite 0.4s; }
+        @keyframes radialPulse {
+          0%, 100% { opacity: 0.12; transform: scale(1); }
+          50%       { opacity: 0.26; transform: scale(1.08); }
+        }
 
-        .dot-a { animation: dotPulse1 2.4s ease-in-out infinite; }
-        .dot-b { animation: dotPulse2 3.1s ease-in-out infinite 0.6s; }
-        .dot-c { animation: dotPulse3 2.8s ease-in-out infinite 1.2s; }
-        .dot-d { animation: dotPulse1 3.4s ease-in-out infinite 1.8s; }
-        .dot-e { animation: dotPulse2 2.6s ease-in-out infinite 2.4s; }
+        .nb-float  { animation: netFloat 16s ease-in-out infinite; }
+        .nb-la     { animation: glow1 3.6s ease-in-out infinite; }
+        .nb-lb     { animation: glow2 4.4s ease-in-out infinite 0.9s; }
+        .nb-lc     { animation: glow3 5.2s ease-in-out infinite 1.7s; }
+        .nb-ld     { animation: glow1 4.0s ease-in-out infinite 2.3s; }
+        .nb-le     { animation: glow2 4.8s ease-in-out infinite 0.5s; }
 
-        .flow-path {
-          stroke-dasharray: 80 220;
-          animation: dashFlow 4s ease-in-out infinite;
-        }
-        .flow-path-b {
-          stroke-dasharray: 60 240;
-          animation: dashFlow 5s ease-in-out infinite 1.5s;
-        }
-        .flow-path-c {
-          stroke-dasharray: 100 200;
-          animation: dashFlow 6s ease-in-out infinite 3s;
-        }
+        .nb-d1 { animation: pulse1 2.5s ease-in-out infinite;      transform-origin: center; }
+        .nb-d2 { animation: pulse2 3.2s ease-in-out infinite 0.7s; transform-origin: center; }
+        .nb-d3 { animation: pulse3 2.9s ease-in-out infinite 1.3s; transform-origin: center; }
+        .nb-d4 { animation: pulse1 3.5s ease-in-out infinite 1.9s; transform-origin: center; }
+        .nb-d5 { animation: pulse2 2.7s ease-in-out infinite 2.5s; transform-origin: center; }
+
+        .nb-f1 { stroke-dasharray: 90 310;  animation: flow  4.5s ease-in-out infinite; }
+        .nb-f2 { stroke-dasharray: 70 330;  animation: flow2 5.5s ease-in-out infinite 1.8s; }
+        .nb-f3 { stroke-dasharray: 110 290; animation: flow  7.0s ease-in-out infinite 3.5s; }
+
+        .nb-blob  { animation: radialPulse 6s ease-in-out infinite;      transform-origin: center; }
+        .nb-blob2 { animation: radialPulse 8s ease-in-out infinite 2.5s; transform-origin: center; }
       `}</style>
 
       <svg
-        viewBox="0 0 357 490"
+        viewBox="0 0 380 320"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
         preserveAspectRatio="xMidYMid slice"
-        style={{ opacity: 0.7 }}
       >
-        <g className="net-group" style={{ mixBlendMode: "screen" }}>
-          {/* ── Main network paths split into groups for staggered animation ── */}
-          <g className="net-line-a">
-            <path
-              d="M311.779 26.495L345.437 22.441L356.335 55.34L297.532 50.07L269.403 63.125L286.112 93.259L322.052 98.847L312.176 125.923L298.128 164.43L265.491 110.663L254.599 160.033L232.043 145.195L191.853 142.929L158.224 158.682L132.975 175.175"
-              stroke="#589CFF"
-              strokeWidth="0.5"
-              strokeMiterlimit="10"
-            />
-            <path
-              d="M322.052 98.847L345.437 22.441L297.532 50.07L312.127 26.407L356.217 55.458L322.052 98.847ZM322.052 98.847L297.532 50.07"
-              stroke="#589CFF"
-              strokeWidth="0.5"
-              strokeMiterlimit="10"
-            />
+        <defs>
+          <radialGradient id="blobA" cx="65%" cy="45%" r="50%">
+            <stop offset="0%"   stopColor="#3B82F6" stopOpacity="0.22" />
+            <stop offset="60%"  stopColor="#1e3a8a" stopOpacity="0.07" />
+            <stop offset="100%" stopColor="#0A192F"  stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="blobB" cx="30%" cy="70%" r="40%">
+            <stop offset="0%"   stopColor="#60A5FA" stopOpacity="0.14" />
+            <stop offset="100%" stopColor="#0A192F"  stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="blobC" cx="80%" cy="20%" r="30%">
+            <stop offset="0%"   stopColor="#79FDFF" stopOpacity="0.09" />
+            <stop offset="100%" stopColor="#0A192F"  stopOpacity="0" />
+          </radialGradient>
+        </defs>
+
+        {/* Glow blobs */}
+        <ellipse className="nb-blob"  cx="268" cy="144" rx="130" ry="110" fill="url(#blobA)" />
+        <ellipse className="nb-blob2" cx="110" cy="224" rx="100" ry="85"  fill="url(#blobB)" />
+        <ellipse className="nb-blob"  cx="310" cy="60"  rx="80"  ry="70"  fill="url(#blobC)" />
+
+        <g className="nb-float" style={{ mixBlendMode: "screen" }}>
+
+          {/* Line group A */}
+          <g className="nb-la">
+            <path d="M310 28L344 24L355 57L296 51L268 64L285 94L321 100L311 127L297 165L264 111L253 160"
+              stroke="#589CFF" strokeWidth="0.55" strokeMiterlimit="10" />
+            <path d="M321 100L344 24L296 51L310 27L355 56Z"
+              stroke="#589CFF" strokeWidth="0.55" strokeMiterlimit="10" />
           </g>
 
-          <g className="net-line-b">
-            <path
-              d="M179.895 177.703L235.289 199.048L222.166 260.298L212.465 305.564L199.667 330.926L168.021 297.729L154.838 283.898L219.548 237.265L193.072 198.712"
-              stroke="#589CFF"
-              strokeWidth="0.5"
-              strokeMiterlimit="10"
-            />
-            <path
-              d="M235.289 199.049L217.505 176.072L191.853 142.929L179.909 177.919L193.071 198.712L235.289 199.049Z"
-              stroke="#589CFF"
-              strokeWidth="0.5"
-              strokeMiterlimit="10"
-            />
+          {/* Line group B */}
+          <g className="nb-lb">
+            <path d="M180 178L234 199L221 261L212 306L199 331L167 298L154 284L219 237L192 199"
+              stroke="#589CFF" strokeWidth="0.55" strokeMiterlimit="10" />
+            <path d="M234 199L216 176L191 143L179 178L192 199Z"
+              stroke="#589CFF" strokeWidth="0.55" strokeMiterlimit="10" />
           </g>
 
-          <g className="net-line-c">
-            <path
-              d="M235.289 199.049L219.337 237.189L154.687 218.82L179.909 177.919L254.599 160.033L235.289 199.049Z"
-              stroke="#589CFF"
-              strokeWidth="0.5"
-              strokeMiterlimit="10"
-            />
-            <path
-              d="M235.289 199.049L174.84 256.792L136.202 225.84L104.69 231.763L133.077 174.874L154.512 218.637L164.791 254.406L154.837 283.898L141.918 256.988L118.247 297.368L106.355 262.374L98.105 342.397"
-              stroke="#589CFF"
-              strokeWidth="0.5"
-              strokeMiterlimit="10"
-            />
+          {/* Line group C */}
+          <g className="nb-lc">
+            <path d="M234 199L218 237L153 219L179 178L253 160L234 199Z"
+              stroke="#589CFF" strokeWidth="0.55" strokeMiterlimit="10" />
+            <path d="M234 199L174 257L135 226L104 232L132 175L154 219L165 254L154 284L141 257L118 297L106 262L97 342"
+              stroke="#589CFF" strokeWidth="0.55" strokeMiterlimit="10" />
           </g>
 
-          <g className="net-line-d">
-            <path
-              d="M119.032 348.053L152.155 313.088L118.247 297.368L136.224 289.012L130.682 315.957L154.825 284.113L176.809 290.986L193.538 276.987L199.594 331.004L230.497 311.343L233.783 333.74L237.286 357.625L198.314 378.734L184.135 341.811L183.33 377.398"
-              stroke="#589CFF"
-              strokeWidth="0.5"
-              strokeMiterlimit="10"
-            />
-            <path
-              d="M199.352 330.85L210.61 348.73L167.852 315.48L184.136 341.811L199.352 330.85Z"
-              stroke="#589CFF"
-              strokeWidth="0.5"
-              strokeMiterlimit="10"
-            />
+          {/* Line group D */}
+          <g className="nb-ld">
+            <path d="M118 348L151 313L117 297L135 289L130 316L154 284L176 291L193 277L199 331L230 311L233 334L236 358L197 379L183 342L182 377"
+              stroke="#589CFF" strokeWidth="0.55" strokeMiterlimit="10" />
           </g>
 
-          <g className="net-line-e">
-            <path
-              d="M209.062 254.149L219.337 237.189L136.486 225.598L193.538 276.987L231.04 311.729L167.936 315.201L152.154 313.089L130.682 315.957L184.135 341.812L98.105 342.397L148.401 374.477L189.08 401.943L218.451 387.518L237.286 357.625L210.609 348.731L183.376 376.758L148.846 374.795L162.021 356.349L140.506 347.172L130.489 316.025L59.89 284.125L90.485 275.192L104.292 231.927L17.15 285.176L49.447 320.919"
-              stroke="#589CFF"
-              strokeWidth="0.5"
-              strokeMiterlimit="10"
-            />
-            <path
-              d="M231.771 145.513L268.213 126.677L322.052 98.848L269.403 63.126L265.49 110.664L191.853 142.93L254.599 160.033L193.071 198.713"
-              stroke="#589CFF"
-              strokeWidth="0.5"
-              strokeMiterlimit="10"
-            />
+          {/* Line group E */}
+          <g className="nb-le">
+            <path d="M208 254L219 237L136 226L193 277L230 312L168 315L151 313L130 316L183 342L97 342L148 374L189 402L218 388L236 358L210 349L182 377L148 375L162 356L140 347L130 316L60 284L90 275L104 232L17 285L49 321"
+              stroke="#589CFF" strokeWidth="0.55" strokeMiterlimit="10" />
+            <path d="M231 146L267 127L321 99L268 63L264 111L191 143L253 160L192 199"
+              stroke="#589CFF" strokeWidth="0.55" strokeMiterlimit="10" />
           </g>
 
-          {/* ── Animated "data flow" overlay paths ── */}
-          <path
-            className="flow-path"
-            d="M311.779 26.495L297.532 50.07L269.403 63.125L265.491 110.663L232.043 145.195L191.853 142.929L179.895 177.703L235.289 199.048"
-            stroke="#60A5FA"
-            strokeWidth="1.5"
-            strokeMiterlimit="10"
-            fill="none"
-          />
-          <path
-            className="flow-path-b"
-            d="M193.072 198.712L219.548 237.265L154.838 283.898L168.021 297.729L199.667 330.926L237.286 357.625L218.451 387.518L189.08 401.943"
-            stroke="#3B82F6"
-            strokeWidth="1.5"
-            strokeMiterlimit="10"
-            fill="none"
-          />
-          <path
-            className="flow-path-c"
-            d="M104.292 231.927L136.202 225.84L174.84 256.792L193.538 276.987L230.497 311.343L237.286 357.625"
-            stroke="#93C5FD"
-            strokeWidth="1.2"
-            strokeMiterlimit="10"
-            fill="none"
-          />
+          {/* Flow particles */}
+          <path className="nb-f1"
+            d="M310 28L296 51L268 64L264 111L231 146L191 143L179 178L234 199"
+            stroke="#60A5FA" strokeWidth="1.8" fill="none" strokeMiterlimit="10" />
+          <path className="nb-f2"
+            d="M192 199L219 237L154 284L167 298L199 331L236 358L218 388L189 402"
+            stroke="#3B82F6" strokeWidth="1.8" fill="none" strokeMiterlimit="10" />
+          <path className="nb-f3"
+            d="M104 232L135 226L174 257L193 277L230 311L236 358"
+            stroke="#93C5FD" strokeWidth="1.4" fill="none" strokeMiterlimit="10" />
 
-          {/* ── Node dots with staggered pulse animations ── */}
-          {/* Top cluster */}
-          <circle
-            className="dot-a"
-            cx="311.779"
-            cy="26.495"
-            r="3"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-b"
-            cx="345.437"
-            cy="22.441"
-            r="2.5"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-c"
-            cx="356.335"
-            cy="55.34"
-            r="3.5"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-d"
-            cx="297.532"
-            cy="50.07"
-            r="3"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-e"
-            cx="322.052"
-            cy="98.847"
-            r="3"
-            fill="#589CFF"
-          />
+          {/* Hub nodes */}
+          <g className="nb-d1"><circle cx="310" cy="28"  r="3"   fill="#589CFF" /><circle cx="310" cy="28"  r="1.2" fill="#EEF5FF" opacity="0.9" /></g>
+          <g className="nb-d2"><circle cx="344" cy="24"  r="2.5" fill="#589CFF" /></g>
+          <g className="nb-d3"><circle cx="355" cy="57"  r="3.5" fill="#589CFF" /><circle cx="355" cy="57"  r="1.4" fill="#EEF5FF" opacity="0.9" /></g>
+          <g className="nb-d4"><circle cx="296" cy="51"  r="3"   fill="#589CFF" /></g>
+          <g className="nb-d5"><circle cx="321" cy="100" r="3"   fill="#589CFF" /></g>
+          <g className="nb-d1"><circle cx="264" cy="111" r="3"   fill="#589CFF" /></g>
+          <g className="nb-d2"><circle cx="253" cy="160" r="2.5" fill="#589CFF" /></g>
+          <g className="nb-d3"><circle cx="191" cy="143" r="3.5" fill="#589CFF" /></g>
 
-          {/* Middle cluster */}
-          <circle
-            className="dot-b"
-            cx="265.491"
-            cy="110.663"
-            r="3"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-c"
-            cx="254.599"
-            cy="160.033"
-            r="2.5"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-a"
-            cx="191.853"
-            cy="142.929"
-            r="3.5"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-d"
-            cx="235.289"
-            cy="199.049"
-            r="4"
-            fill="#3B82F6"
-          />
-          <circle
-            className="dot-e"
-            cx="179.895"
-            cy="177.703"
-            r="3"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-a"
-            cx="219.548"
-            cy="237.265"
-            r="3"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-b"
-            cx="193.538"
-            cy="276.987"
-            r="2.5"
-            fill="#589CFF"
-          />
+          {/* Key hub — extra glow */}
+          <g className="nb-d4">
+            <circle cx="234" cy="199" r="6"   fill="#3B82F6" opacity="0.2" />
+            <circle cx="234" cy="199" r="3.8" fill="#3B82F6" />
+            <circle cx="234" cy="199" r="1.4" fill="#EEF5FF" opacity="0.95" />
+          </g>
 
-          {/* Lower cluster */}
-          <circle
-            className="dot-c"
-            cx="199.667"
-            cy="330.926"
-            r="3.5"
-            fill="#3B82F6"
-          />
-          <circle
-            className="dot-d"
-            cx="237.286"
-            cy="357.625"
-            r="3"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-e"
-            cx="218.451"
-            cy="387.518"
-            r="3"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-a"
-            cx="148.401"
-            cy="374.477"
-            r="2.5"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-b"
-            cx="183.376"
-            cy="376.758"
-            r="3"
-            fill="#589CFF"
-          />
+          <g className="nb-d5"><circle cx="179" cy="178" r="3"   fill="#589CFF" /></g>
+          <g className="nb-d1"><circle cx="219" cy="237" r="3"   fill="#589CFF" /></g>
+          <g className="nb-d2"><circle cx="193" cy="277" r="2.5" fill="#589CFF" /></g>
 
-          {/* Left cluster */}
-          <circle
-            className="dot-c"
-            cx="104.292"
-            cy="231.927"
-            r="2.5"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-d"
-            cx="136.202"
-            cy="225.84"
-            r="3"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-e"
-            cx="17.15"
-            cy="285.176"
-            r="3"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-a"
-            cx="59.89"
-            cy="284.125"
-            r="2.5"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-b"
-            cx="49.447"
-            cy="320.919"
-            r="3"
-            fill="#589CFF"
-          />
-          <circle
-            className="dot-c"
-            cx="98.105"
-            cy="342.397"
-            r="3.5"
-            fill="#3B82F6"
-          />
+          <g className="nb-d3">
+            <circle cx="199" cy="331" r="5"   fill="#3B82F6" opacity="0.2" />
+            <circle cx="199" cy="331" r="3.2" fill="#3B82F6" />
+            <circle cx="199" cy="331" r="1.2" fill="#EEF5FF" opacity="0.9" />
+          </g>
 
-          {/* Bright highlight dots on key nodes */}
-          <circle
-            className="dot-d"
-            cx="235.289"
-            cy="199.049"
-            r="1.5"
-            fill="#EEF5FF"
-            opacity="0.9"
-          />
-          <circle
-            className="dot-e"
-            cx="199.667"
-            cy="330.926"
-            r="1.5"
-            fill="#EEF5FF"
-            opacity="0.9"
-          />
-          <circle
-            className="dot-a"
-            cx="98.105"
-            cy="342.397"
-            r="1.5"
-            fill="#EEF5FF"
-            opacity="0.9"
-          />
+          <g className="nb-d4"><circle cx="236" cy="358" r="3"   fill="#589CFF" /></g>
+          <g className="nb-d5"><circle cx="218" cy="388" r="3"   fill="#589CFF" /></g>
+          <g className="nb-d1"><circle cx="148" cy="374" r="2.5" fill="#589CFF" /></g>
+          <g className="nb-d2"><circle cx="182" cy="377" r="3"   fill="#589CFF" /></g>
+          <g className="nb-d3"><circle cx="104" cy="232" r="2.5" fill="#589CFF" /></g>
+          <g className="nb-d4"><circle cx="135" cy="226" r="3"   fill="#589CFF" /></g>
+          <g className="nb-d5"><circle cx="17"  cy="285" r="3"   fill="#589CFF" /></g>
+          <g className="nb-d1"><circle cx="60"  cy="284" r="2.5" fill="#589CFF" /></g>
+          <g className="nb-d2"><circle cx="49"  cy="321" r="3"   fill="#589CFF" /></g>
+
+          <g className="nb-d3">
+            <circle cx="97" cy="342" r="5"   fill="#3B82F6" opacity="0.2" />
+            <circle cx="97" cy="342" r="3.2" fill="#3B82F6" />
+            <circle cx="97" cy="342" r="1.2" fill="#EEF5FF" opacity="0.9" />
+          </g>
         </g>
       </svg>
     </div>

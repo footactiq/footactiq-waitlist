@@ -1,4 +1,8 @@
 "use client";
+import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
+
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const LINKS = ["How It Works", "Features", "AI Coach"];
 const LEGAL = ["Privacy policy", "Terms & condition"];
@@ -49,40 +53,56 @@ const SOCIALS = [
   },
 ];
 
+const containerVariants: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const colVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+};
+
+const socialVariants: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.07 } },
+};
+
+const iconVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.7 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.35, ease: EASE } },
+};
+
 export default function Footer() {
   return (
     <footer
-      style={{
-        background: "#0A192F",
-        fontFamily: "'Trebuchet MS', sans-serif",
-      }}
+      style={{ background: "#0A192F", fontFamily: "'Trebuchet MS', sans-serif" }}
       className="px-6 sm:px-10 lg:px-[60px] py-12"
     >
       <div className="max-w-[1100px] mx-auto">
-        {/* Top section — stacks on mobile, 4 cols on desktop */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 sm:gap-12 lg:gap-20 items-start">
-          
-          {/* Brand — full width on mobile */}
-          <div className="col-span-2 sm:col-span-1">
-            <div
-              style={{
-                fontSize: 22,
-                fontWeight: 900,
-                color: "#ffffff",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                marginBottom: 10,
-              }}
-            >
+
+        <motion.div
+          className="grid grid-cols-2 sm:grid-cols-4 gap-10 sm:gap-12 lg:gap-20 items-start"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+        >
+          {/* Brand */}
+          <motion.div variants={colVariants} className="col-span-2 sm:col-span-1">
+            <div style={{
+              fontSize: 22, fontWeight: 900, color: "#ffffff",
+              letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 10,
+            }}>
               FOOTACTIQ
             </div>
             <p style={{ margin: 0, fontSize: 13, color: "rgba(255,255,255,0.45)" }}>
               ©2026. All Rights Reserved
             </p>
-          </div>
+          </motion.div>
 
           {/* Links */}
-          <div>
+          <motion.div variants={colVariants}>
             <h4 style={{ margin: "0 0 16px", fontSize: 14, fontWeight: 700, color: "#ffffff" }}>
               Links
             </h4>
@@ -91,12 +111,7 @@ export default function Footer() {
                 <li key={l}>
                   <a
                     href="#"
-                    style={{
-                      fontSize: 13,
-                      color: "rgba(255,255,255,0.55)",
-                      textDecoration: "none",
-                      transition: "color 0.15s",
-                    }}
+                    style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", textDecoration: "none", transition: "color 0.15s" }}
                     onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = "#fff")}
                     onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)")}
                   >
@@ -105,10 +120,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Legal */}
-          <div>
+          <motion.div variants={colVariants}>
             <h4 style={{ margin: "0 0 16px", fontSize: 14, fontWeight: 700, color: "#ffffff" }}>
               Legal
             </h4>
@@ -117,12 +132,7 @@ export default function Footer() {
                 <li key={l}>
                   <a
                     href="#"
-                    style={{
-                      fontSize: 13,
-                      color: "rgba(255,255,255,0.55)",
-                      textDecoration: "none",
-                      transition: "color 0.15s",
-                    }}
+                    style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", textDecoration: "none", transition: "color 0.15s" }}
                     onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = "#fff")}
                     onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)")}
                   >
@@ -131,26 +141,26 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          {/* Social icons — horizontal on mobile, vertical on desktop */}
-          <div className="col-span-2 sm:col-span-1 flex sm:flex-col flex-row flex-wrap gap-3 sm:items-center items-start">
+          {/* Socials */}
+          <motion.div
+            variants={socialVariants}
+            className="col-span-2 sm:col-span-1 flex sm:flex-col flex-row flex-wrap gap-3 sm:items-center items-start"
+          >
             {SOCIALS.map(({ label, icon }) => (
-              <a
+              <motion.a
                 key={label}
+                variants={iconVariants}
                 href="#"
                 aria-label={label}
+                whileHover={{ scale: 1.15, transition: { duration: 0.15 } }}
                 style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: 6,
+                  width: 32, height: 32, borderRadius: 6,
                   background: "rgba(255,255,255,0.08)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "rgba(255,255,255,0.6)",
-                  textDecoration: "none",
-                  transition: "all 0.15s",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  color: "rgba(255,255,255,0.6)", textDecoration: "none",
+                  transition: "background 0.15s, color 0.15s",
                 }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.15)";
@@ -162,20 +172,25 @@ export default function Footer() {
                 }}
               >
                 {icon}
-              </a>
+              </motion.a>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Divider */}
-        <div
+        <motion.div
           className="mt-10 pt-6"
           style={{ borderTop: "1px solid rgba(255,255,255,0.08)", textAlign: "center" }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: EASE, delay: 0.3 }}
         >
           <p style={{ margin: 0, fontSize: 12, color: "rgba(255,255,255,0.3)" }}>
             Built for coaches who want to win smarter.
           </p>
-        </div>
+        </motion.div>
+
       </div>
     </footer>
   );

@@ -1,5 +1,8 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 interface MessageType {
   role: "user" | "assistant";
@@ -15,9 +18,7 @@ function TypingIndicator() {
         <div
           key={i}
           style={{
-            width: 6,
-            height: 6,
-            borderRadius: "50%",
+            width: 6, height: 6, borderRadius: "50%",
             background: "rgba(255,255,255,0.5)",
             animation: "bounce 1.2s infinite",
             animationDelay: `${i * 0.2}s`,
@@ -57,7 +58,10 @@ function FormattedText({ text }: { text: string }) {
 function Message({ msg }: { msg: MessageType }) {
   const isUser = msg.role === "user";
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 10, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.3, ease: EASE }}
       style={{
         display: "flex",
         justifyContent: isUser ? "flex-end" : "flex-start",
@@ -83,7 +87,7 @@ function Message({ msg }: { msg: MessageType }) {
           <FormattedText text={msg.content} />
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -92,16 +96,12 @@ export default function AICoach() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ── ref on the scrollable container, not a bottom div ──
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-scroll to bottom whenever messages change
   useEffect(() => {
     const el = scrollContainerRef.current;
-    if (el) {
-      el.scrollTop = el.scrollHeight;
-    }
+    if (el) el.scrollTop = el.scrollHeight;
   }, [messages]);
 
   const sendMessage = async (text: string = "") => {
@@ -134,14 +134,11 @@ export default function AICoach() {
       });
 
       const data = await res.json();
-      const reply =
-        data.reply || "I couldn't analyse that. Try rephrasing your question.";
+      const reply = data.reply || "I couldn't analyse that. Try rephrasing your question.";
 
       setMessages((prev) =>
         prev.map((m) =>
-          m.id === typingId
-            ? { role: "assistant" as const, content: reply }
-            : m
+          m.id === typingId ? { role: "assistant" as const, content: reply } : m
         )
       );
     } catch {
@@ -173,7 +170,7 @@ export default function AICoach() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        padding: "48px 16px 32px",
+        padding: "58px 16px 62px",
         fontFamily: "'Trebuchet MS', sans-serif",
       }}
     >
@@ -181,10 +178,6 @@ export default function AICoach() {
         @keyframes bounce {
           0%, 80%, 100% { transform: translateY(0); opacity: 0.35; }
           40% { transform: translateY(-5px); opacity: 1; }
-        }
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(10px); }
-          to   { opacity: 1; transform: translateY(0); }
         }
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
@@ -195,36 +188,33 @@ export default function AICoach() {
       `}</style>
 
       {/* Header */}
-      <div style={{ textAlign: "center", marginBottom: 36, animation: "fadeUp 0.5s ease" }}>
+      <motion.div
+        style={{ textAlign: "center", marginBottom: 36 }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.6, ease: EASE }}
+      >
         <h1
-        className="text-[22px] sm:text-[28px] lg:text-[32px] "
-          style={{
-            margin: "0 0 10px",
-            fontWeight: 800,
-            color: "#fff",
-            letterSpacing: "-0.01em",
-            lineHeight: 1.15,
-          }}
+          className="text-[22px] sm:text-[24px] lg:text-[28px] font-semibold"
+          style={{ margin: "0 0 10px", color: "#fff", letterSpacing: "-0.01em", lineHeight: 1.15 }}
         >
           Ask. Analyse. Improve.
         </h1>
-        <p className="text-[12px] sm:text-[14px] leading-relaxed"
-          style={{
-            margin: 0,
-            
-            color: "rgba(255,255,255,0.4)",
-            maxWidth: 460,
-            lineHeight: 1.65,
-          }}
+        <p
+          className="text-[12px] sm:text-[14px] leading-relaxed"
+          style={{ margin: 0, color: "rgba(255,255,255,0.4)", maxWidth: 460, lineHeight: 1.65 }}
         >
-          Experience how Footactiq thinks. Ask a tactical question and
-         
-          get AI-powered insights instantly.
+          Experience how Footactiq thinks. Ask a tactical question and get AI-powered insights instantly.
         </p>
-      </div>
+      </motion.div>
 
       {/* Chat Window */}
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
         style={{
           width: "100%",
           maxWidth: 780,
@@ -234,7 +224,6 @@ export default function AICoach() {
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",
-          animation: "fadeUp 0.6s ease 0.1s both",
           boxShadow: "0 24px 64px rgba(0,0,0,0.45)",
         }}
       >
@@ -249,14 +238,11 @@ export default function AICoach() {
           }}
         >
           {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
-            <div
-              key={c}
-              style={{ width: 11, height: 11, borderRadius: "50%", background: c }}
-            />
+            <div key={c} style={{ width: 11, height: 11, borderRadius: "50%", background: c }} />
           ))}
         </div>
 
-        {/* ── Scrollable messages — ref is HERE on the container ── */}
+        {/* Scrollable messages */}
         <div
           ref={scrollContainerRef}
           style={{
@@ -267,28 +253,37 @@ export default function AICoach() {
             scrollBehavior: "smooth",
           }}
         >
-          {messages.length === 0 && (
-            <p
-              style={{
-                color: "rgba(255,255,255,0.18)",
-                fontSize: 13,
-                fontStyle: "italic",
-                textAlign: "center",
-                marginTop: 80,
-              }}
-            >
-              Ask any football related question
-            </p>
-          )}
-          {messages.map((msg, i) => (
-            <div key={i} style={{ animation: "fadeUp 0.25s ease" }}>
-              <Message msg={msg} />
-            </div>
-          ))}
+          <AnimatePresence initial={false}>
+            {messages.length === 0 && (
+              <motion.p
+                key="placeholder"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  color: "rgba(255,255,255,0.18)",
+                  fontSize: 13,
+                  fontStyle: "italic",
+                  textAlign: "center",
+                  marginTop: 80,
+                }}
+              >
+                Ask any football related question
+              </motion.p>
+            )}
+            {messages.map((msg, i) => (
+              <Message key={msg.id ?? i} msg={msg} />
+            ))}
+          </AnimatePresence>
         </div>
 
         {/* Input bar */}
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: EASE, delay: 0.2 }}
           style={{
             margin: "0 16px 16px",
             display: "flex",
@@ -309,12 +304,8 @@ export default function AICoach() {
             disabled={loading}
             placeholder="Ask any football related question..."
             style={{
-              flex: 1,
-              background: "none",
-              border: "none",
-              color: "#fff",
-              fontSize: 13.5,
-              padding: "13px 0",
+              flex: 1, background: "none", border: "none",
+              color: "#fff", fontSize: 13.5, padding: "13px 0",
               fontFamily: "inherit",
             }}
           />
@@ -323,32 +314,19 @@ export default function AICoach() {
             onClick={() => sendMessage()}
             disabled={loading || !input.trim()}
             style={{
-              width: 36,
-              height: 36,
-              borderRadius: 8,
-              border: "none",
-              background:
-                loading || !input.trim() ? "rgba(59,130,246,0.35)" : "#3b82f6",
+              width: 36, height: 36, borderRadius: 8, border: "none",
+              background: loading || !input.trim() ? "rgba(59,130,246,0.35)" : "#3b82f6",
               cursor: loading || !input.trim() ? "not-allowed" : "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              transition: "all 0.18s",
-              flexShrink: 0,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              transition: "all 0.18s", flexShrink: 0,
             }}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M13 8L8 3M13 8L8 13M13 8H3"
-                stroke="#fff"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              <path d="M13 8L8 3M13 8L8 13M13 8H3" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

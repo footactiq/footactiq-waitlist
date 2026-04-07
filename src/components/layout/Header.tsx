@@ -1,13 +1,32 @@
 "use client";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { useSignup } from "@/context/SignupContext";
 import { LogoIcon } from "../../../public/svg/svg";
+
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const NAV_LINKS = [
   { label: "How It Works", href: "#how-it-works" },
   { label: "Features", href: "#features" },
   { label: "AI Coach", href: "#ai-coach" },
 ];
+
+const BUTTON_STYLE: React.CSSProperties = {
+  background: "linear-gradient(180deg, #3B82F6 0%, #204887 100%)",
+  border: "none",
+  cursor: "pointer",
+  fontFamily: "inherit",
+  borderRadius: 10,
+  padding: "8px 18px",
+  minWidth: 180,
+  color: "#fff",
+  fontSize: 12,
+  fontWeight: 600,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
 
 export default function Header() {
   const { openSignup } = useSignup();
@@ -21,7 +40,10 @@ export default function Header() {
   }, []);
 
   return (
-    <header
+    <motion.header
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: EASE }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-[#0A192F]/90 backdrop-blur-xl py-3"
@@ -29,6 +51,7 @@ export default function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+
         {/* Logo */}
         <a href="/" className="flex items-center gap-2 group">
           <LogoIcon />
@@ -36,50 +59,56 @@ export default function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((l) => (
-            <a
+          {NAV_LINKS.map((l, i) => (
+            <motion.a
               key={l.href}
               href={l.href}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: EASE, delay: 0.15 + i * 0.07 }}
               className="text-sm font-medium text-white/60 hover:text-white transition-colors relative group"
             >
               {l.label}
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-brand-accent group-hover:w-full transition-all duration-300" />
-            </a>
+            </motion.a>
           ))}
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden md:flex items-center">
+        <motion.div
+          className="hidden md:flex items-center"
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE, delay: 0.4 }}
+        >
           <button
             onClick={openSignup}
-            className="relative px-5 py-2.5 rounded-lg bg-brand-blue text-white text-sm font-semibold overflow-hidden group transition-all hover:scale-105 glow-blue"
-            style={{ border: "none", cursor: "pointer", fontFamily: "inherit" }}
+            className="transition-all hover:scale-105 hover:opacity-90"
+            style={BUTTON_STYLE}
           >
-            <span className="relative z-10">Get early access</span>
-            <span className="absolute inset-0 bg-gradient-to-r from-brand-blue to-brand-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            Get early access
           </button>
-        </div>
+        </motion.div>
 
         {/* Hamburger */}
         <button
           className="md:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span
-            className={`block w-6 h-0.5 bg-white transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-white transition-all ${menuOpen ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-white transition-all ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
-          />
+          <span className={`block w-6 h-0.5 bg-white transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+          <span className={`block w-6 h-0.5 bg-white transition-all ${menuOpen ? "opacity-0" : ""}`} />
+          <span className={`block w-6 h-0.5 bg-white transition-all ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
         </button>
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-[#0A192F]/97 backdrop-blur-xl border-b border-white/10 px-6 py-6 flex flex-col gap-4">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, ease: EASE }}
+          className="md:hidden absolute top-full left-0 right-0 bg-[#0A192F]/97 backdrop-blur-xl border-b border-white/10 px-6 py-6 flex flex-col gap-4"
+        >
           {NAV_LINKS.map((l) => (
             <a
               key={l.href}
@@ -91,23 +120,14 @@ export default function Header() {
             </a>
           ))}
           <button
-            onClick={() => {
-              setMenuOpen(false);
-              openSignup();
-            }}
-            className="px-7 py-3 rounded-lg text-white font-semibold text-sm"
-            style={{
-              background: "#3B82F6",
-              boxShadow: "0 0 24px rgba(59,130,246,0.45)",
-              border: "none",
-              cursor: "pointer",
-              fontFamily: "inherit",
-            }}
+            onClick={() => { setMenuOpen(false); openSignup(); }}
+            className="transition-all hover:opacity-90"
+            style={{ ...BUTTON_STYLE, minWidth: "unset", width: "100%" }}
           >
             Get early access
           </button>
-        </div>
+        </motion.div>
       )}
-    </header>
+    </motion.header>
   );
 }
