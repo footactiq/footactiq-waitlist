@@ -15,9 +15,9 @@ export default function HeroSection() {
       <div className="absolute inset-0 pointer-events-none"
         style={{ zIndex: 1, background: "rgba(5, 13, 26, 0.66)" }} />
 
-      <div className="relative flex flex-col items-center justify-center text-center px-6 max-w-3xl mx-auto"
+      <div className="relative flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto"
         style={{ zIndex: 2 }}>
-        <h1 className="font-black mb-5 leading-[1.05] w-full max-w-3xl text-4xl sm:text-5xl md:text-7xl"
+        <h1 className="font-black mb-5 leading-[1.05] w-full max-w-5xl text-[28px] sm:text-[34px] lg:text-[45px] tracking-wide"
           style={{ color: "#FFFFFF" }}>
           Analyze Matches Like A Pro; Without Analysts
         </h1>
