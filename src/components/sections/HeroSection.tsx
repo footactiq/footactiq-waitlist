@@ -65,7 +65,7 @@ export default function HeroSection() {
           className="font-black mb-5 leading-[1.05] w-full max-w-4xl text-[28px] sm:text-[34px] lg:text-[45px] tracking-wide font-semibold"
           style={{ color: "#FFFFFF" }}
         >
-          Analyze Matches Like A Pro; Without Analysts
+          One Upload. Full Tactical Breakdown. Zero Analysts Needed
         </motion.h1>
 
         <motion.p
@@ -73,8 +73,7 @@ export default function HeroSection() {
           className="text-base leading-relaxed mb-10 max-w-[460px] text-[12px] sm:text-[14px]"
           style={{ color: "#E9E9E9", fontWeight: 300, opacity: 0.85 }}
         >
-          Upload match footage and get instant tactical insights, player metrics,
-          and AI-driven recommendations.
+          Upload your match footage and let our AI handle the rest — tactical patterns, player metrics, and actionable insights delivered in seconds.
         </motion.p>
 
         <motion.div

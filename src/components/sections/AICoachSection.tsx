@@ -171,7 +171,7 @@ export default function AICoach() {
         flexDirection: "column",
         alignItems: "center",
         padding: "58px 16px 62px",
-        fontFamily: "'Trebuchet MS', sans-serif",
+        fontFamily: "var(--font-body)",
       }}
     >
       <style>{`

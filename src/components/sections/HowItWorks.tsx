@@ -8,26 +8,26 @@ const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const FEATURES = [
   {
     icon: FootageIcon,
-    title: "Upload Match Footage",
-    description: "Add your match video and basic details.",
+    title: "Upload Your Match Footage",
+    description: "Drop in your match video and let the AI take it from there.",
   },
   {
     icon: ProcessIcon,
-    title: "AI Processes the Game",
+    title: "AI Analyzes Every Moment",
     description:
-      "Key events, player movements, and patterns are automatically detected.",
+      "Our AI scans every frame — detecting key events, player movements, and tactical patterns automatically.",
   },
   {
     icon: VisualIcon,
-    title: "Visual Insights Are Generated",
+    title: "AI Generates Visual Insights",
     description:
-      "See heatmaps, passing networks, and performance data instantly.",
+      "Heatmaps, passing networks, and performance data are built instantly by AI — no manual work needed.",
   },
   {
     icon: TacticalIcon,
-    title: "Get Tactical Recommendations",
+    title: "AI Tells You What to Do Next",
     description:
-      "Receive AI-driven insights to improve your team's performance.",
+      "Get clear, AI-powered recommendations to fix weaknesses, improve shape, and win more games.",
   },
 ];
 
@@ -59,11 +59,10 @@ export default function HowItWorksSection2() {
             transition={{ duration: 0.6, ease: EASE }}
           >
             <h2 className="text-[#111827] font-semibold mb-4 text-[22px] sm:text-[24px] lg:text-[28px]">
-              HOW IT WORKS
+              HOW The Ai WORKS
             </h2>
             <p className="text-[#6B7280] leading-relaxed max-w-lg mx-auto text-[12px] sm:text-[14px]">
-              A simple workflow designed for real coaches.
-            </p>
+              Four steps. Zero analysts. Full tactical intelligence.</p>
           </motion.div>
 
           <motion.div
