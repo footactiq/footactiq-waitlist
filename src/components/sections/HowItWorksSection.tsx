@@ -224,7 +224,7 @@ export default function HowItWorksSection() {
                 >
                   {/* Inner dark chrome frame */}
                   <div
-                    className="relative w-full rounded-2xl overflow-hidden p-12"
+                    className="relative w-full rounded-2xl overflow-hidden p-8"
                     style={{
                       backgroundImage: "url('/images/background.png')",
                       backgroundSize: "cover",

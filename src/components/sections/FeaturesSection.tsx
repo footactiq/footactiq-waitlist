@@ -85,7 +85,7 @@ export default function FeaturesSection() {
         <MarqueeSection />
 
         {/* ── Comparison cards ── */}
-        <div className="w-full max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 mb-16 py-24">
+        <div className="w-full max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 mb-16 py-16">
           {/* Without Footactiq AI */}
           <motion.div
             className="rounded-2xl p-8"
@@ -136,7 +136,7 @@ export default function FeaturesSection() {
 
           {/* With Footactiq AI */}
           <motion.div
-            className="rounded-2xl p-10 pl-16"
+            className="rounded-2xl p-4 pl-8"
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}

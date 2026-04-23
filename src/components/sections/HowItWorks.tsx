@@ -59,7 +59,7 @@ export default function HowItWorksSection2() {
             transition={{ duration: 0.6, ease: EASE }}
           >
             <h2 className="text-[#111827] font-semibold mb-4 text-[22px] sm:text-[24px] lg:text-[28px]">
-              HOW The Ai WORKS
+              HOW The AI WORKS
             </h2>
             <p className="text-[#6B7280] leading-relaxed max-w-lg mx-auto text-[12px] sm:text-[14px]">
               Four steps. Zero analysts. Full tactical intelligence.</p>
